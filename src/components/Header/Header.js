@@ -23,7 +23,7 @@ const alwaysOptions = (
 )
 
 const Header = ({ user }) => (
-  <Navbar bg="primary" variant="dark" expand="md">
+  <Navbar bg="success" variant="dark" expand="md">
     <Navbar.Brand href="#">
       Miraculous Destinations
     </Navbar.Brand>
