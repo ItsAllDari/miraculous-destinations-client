@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 import apiUrl from './../../apiConfig'
-import CheckMark from './CheckMark'
+// import CheckMark from './CheckMark'
 
 import messages from './../AutoDismissAlert/messages'
 
@@ -17,14 +17,14 @@ const Locations = (props) => {
       url: `${apiUrl}/locations/`,
       method: 'GET',
       headers: {
-        'Authorization': `Token token=${props.user.token}`
+        'Authorization': `Token ${props.user.token}`
       }
     })
       // .then(res => {
       //   console.log(res)
       //   return res
       // })
-      .then(res => setLocations(res.data.locations))
+      .then(res => setLocations(res.data))
       // .catch(console.error)
 
       .then(() => msgAlert({
@@ -33,7 +33,7 @@ const Locations = (props) => {
         variant: 'primary'
       }))
       .catch(error => {
-        setLocations({ name: '', description: '' })
+        setLocations({ city: '', state: '', country: '' })
         msgAlert({
           heading: 'Failed to show all locations ' + error.message,
           message: messages.showLocationsFailure,
@@ -42,17 +42,21 @@ const Locations = (props) => {
       })
   }, [])
 
-  const locationsJsx = locations.map(location => <CheckMark {...props} key={location._id} location={location} />)
+  const locationsJsx = locations.map(location => (
+    <li key={location._id}>
+      <Link to={`/locations/${location._id}`}>{location.city}</Link>
+    </li>
+  ))
 
   return (
     <div className="location-style">
-      <h4>My Locations</h4>
+      <h4 className="location-font">My Locations</h4>
       <div className="center">
-        <div className="list-display">
+        <div className="location-display">
           {locationsJsx}
         </div>
       </div>
-      <Link to={'/create-location'}>
+      <Link to={'/new-location'}>
         <button className="button btn btn-success" >Add City</button>
       </Link>
     </div>

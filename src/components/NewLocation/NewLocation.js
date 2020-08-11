@@ -1,102 +1,64 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
+import axios from 'axios'
 
-import { newLocation } from '../../api/location'
-import messages from '../AutoDismissAlert/messages'
+import apiUrl from '../../apiConfig'
+import LocationForm from './../Shared/LocationForm'
+import messages from './../AutoDismissAlert/messages'
 
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+const LocationCreate = (props) => {
+  const [location, setLocation] = useState({ city: '', state: '', country: '' })
+  const [createdLocationId, setCreatedLocationId] = useState(null)
+  const handleChange = event => {
+    const updatedField = { [event.target.name]: event.target.value }
 
-class NewLocation extends Component {
-  constructor () {
-    super()
-
-    this.state = {
-      city: '',
-      state: '',
-      country: ''
-    }
+    const editedLocation = Object.assign({}, location, updatedField)
+    setLocation(editedLocation)
   }
 
-  handleChange = event => this.setState({
-    [event.target.name]: event.target.value
-  })
-
-  onNewLocation = event => {
+  const handleSubmit = event => {
     event.preventDefault()
 
-    const { msgAlert, history, setLocation } = this.props
-
-    newLocation(this.state)
-      .then(res => setLocation(res.data.user))
+    const { msgAlert } = props
+    axios({
+      url: `${apiUrl}/locations/`,
+      method: 'POST',
+      headers: {
+        'Authorization': `Token ${props.user.token}`
+      },
+      data: { location }
+    })
+      // .then(res => console.log(res))
+      .then(res => setCreatedLocationId(res.data.id))
       .then(() => msgAlert({
-        heading: 'New Location Added',
-        message: messages.newLocationSuccess,
+        heading: 'Create list success',
+        message: messages.createLocationSuccess,
         variant: 'success'
       }))
-      .then(() => history.push('/'))
       .catch(error => {
-        this.setState({ city: '', state: '', country: '' })
+        setLocation({ city: '', state: '', country: '' })
         msgAlert({
-          heading: 'New location failed with error: ' + error.message,
-          message: messages.newLocationFailure,
+          heading: 'Create location failed: ' + error.message,
+          message: messages.createLocationFailure,
           variant: 'danger'
         })
       })
   }
 
-  render () {
-    const { city, state, country } = this.state
-
-    return (
-      <div className="row">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <h3>New Location</h3>
-          <Form onSubmit={this.onNewLocation}>
-            <Form.Group controlId="city">
-              <Form.Label>City Name</Form.Label>
-              <Form.Control
-                required
-                type="city"
-                name="city"
-                value={city}
-                placeholder="Enter city name"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="state">
-              <Form.Label>State</Form.Label>
-              <Form.Control
-                required
-                name="state"
-                value={state}
-                type="state"
-                placeholder="State"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="country">
-              <Form.Label>Country</Form.Label>
-              <Form.Control
-                required
-                name="country"
-                value={country}
-                type="country"
-                placeholder="Country"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Button
-              variant="primary"
-              type="submit"
-            >
-              Submit
-            </Button>
-          </Form>
-        </div>
-      </div>
-    )
+  if (createdLocationId) {
+    return <Redirect to={`/locations/${createdLocationId}`} />
   }
+
+  return (
+    <div>
+      <LocationForm
+        location={location}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        cancelPath='/locations/'
+      />
+    </div>
+  )
 }
 
-export default withRouter(NewLocation)
+export default LocationCreate
