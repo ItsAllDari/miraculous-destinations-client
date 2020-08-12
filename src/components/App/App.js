@@ -13,6 +13,8 @@ import Locations from '../Locations/Locations'
 import Location from '../Location/Location'
 import LocationEdit from '../LocationEdit/LocationEdit'
 
+const apiKey = 'd5f16a9cc8b9f63fa4160694e460b64d'
+
 class App extends Component {
   constructor () {
     super()
@@ -21,6 +23,7 @@ class App extends Component {
       user: null,
       msgAlerts: []
     }
+    this.getWeather()
   }
 
   setUser = user => this.setState({ user })
@@ -29,6 +32,14 @@ class App extends Component {
 
   msgAlert = ({ heading, message, variant }) => {
     this.setState({ msgAlerts: [...this.state.msgAlerts, { heading, message, variant }] })
+  }
+
+  getWeather = async () => {
+    const apiCall = await fetch(
+      `http://api.openweathermap.org/data/2.5/weather?q=Boston,MA&appid=${apiKey}`
+    )
+    const response = await apiCall.json()
+    console.log(response)
   }
 
   render () {
@@ -53,14 +64,14 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/new-location/' render={() => (
             <NewLocation msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} exact path='/locations/' render={(props) => (
-            <Locations {...props} msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute user={user} exact path='/locations/:id/edit' render={(props) => (
+            <LocationEdit {...props} msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} exact path='/locations/:id/' render={(props) => (
             <Location {...props} msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} exact path='/locations/:id/edit' render={(props) => (
-            <LocationEdit {...props} msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute user={user} exact path='/locations/' render={(props) => (
+            <Locations {...props} msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
         {msgAlerts.map((msgAlert, index) => (
