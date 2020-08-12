@@ -16,13 +16,13 @@ const LocationEdit = props => {
   //  functions like a componentDidMount
   useEffect(() => {
     axios({
-      url: `${apiUrl}/locations/${props.match.params.id}`,
+      url: `${apiUrl}/locations/${props.match.params.id}/`,
       method: 'GET',
       headers: {
         'Authorization': `Token ${props.user.token}`
       }
     })
-      .then(res => setLocation(res.data.location))
+      .then(res => setLocation(res.data))
       .catch(console.error)
   }, [])
   const handleChange = event => {
@@ -36,7 +36,7 @@ const LocationEdit = props => {
   const handleSubmit = event => {
     event.preventDefault()
     axios({
-      url: `${apiUrl}/locations/${props.match.params.id}`,
+      url: `${apiUrl}/locations/${props.match.params.id}/`,
       method: 'PATCH',
       headers: {
         'Authorization': `Token ${props.user.token}`
@@ -60,12 +60,12 @@ const LocationEdit = props => {
       })
   }
   if (updated) {
-    return <Redirect to={`/locations/${props.match.params.id}`} />
+    return <Redirect to={`/locations/${props.match.params.id}/`} />
   }
   return (
     <div>
       <LocationForm
-        list={location}
+        location={location}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         cancelPath={`/locations/${props.match.params.id}`}
