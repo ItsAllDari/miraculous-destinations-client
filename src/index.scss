@@ -3,9 +3,12 @@
 
 body {
   font-family: 'Orbitron', sans-serif;
-  background-image: url('https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/D8qa-2E/rainy-stormy-darkness-wet-weather-background-depressed-sad-background_bzxjr4x7h_thumbnail-1080_01.png');
+  background-image: url('https://i.pinimg.com/originals/e3/6e/16/e36e163adaba71d5a6441ec0499829e1.png');
   background-attachment: fixed;
   background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
 }
 
 .location-style {
@@ -16,6 +19,7 @@ body {
   border-style: groove;
   background-color: black;
   max-width: calc(100vh - 30vh);
+  color: white;
 }
 
 .location-font {
@@ -54,4 +58,21 @@ h4 {
 
 .button {
   variant: light;
+}
+
+img {
+  height: 45px;
+  width: 50px;
+}
+
+.weather {
+  height: 300px;
+  width: 350px;
+  align-items: center;
+}
+
+.dropdown {
+  text-align: center;
+  justify-content: center;
+  float: left;
 }
