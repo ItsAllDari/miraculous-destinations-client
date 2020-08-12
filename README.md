@@ -5,7 +5,9 @@
 <a href="https://github.com/ItsAllDari/miraculous-destinations">Back End Github</a>
 
 <h2>Wireframes</h2>
+![Screen Shot 2020-08-12 at 12 16 40 AM](https://user-images.githubusercontent.com/58965588/89975434-b963f500-dc33-11ea-86c4-6208fc65ed3b.png)
 
+![Screen Shot 2020-08-12 at 12 17 46 AM](https://user-images.githubusercontent.com/58965588/89975443-c41e8a00-dc33-11ea-90a5-e2500452a9d2.png)
 
 <h2>Technologies Used</h2>
 <ul>
