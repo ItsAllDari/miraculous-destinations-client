@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const LocationForm = ({ location, handleSubmit, handleChange, cancelPath }) => (
+const LocationForm = ({ props, location, handleSubmit, handleChange, cancelPath }) => (
   <form onSubmit={handleSubmit}>
     <div>
       <label>City</label>
