@@ -1,13 +1,22 @@
 import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 const authenticatedOptions = (
-  <Fragment>
-    <Nav.Link href="#change-password">Change Password</Nav.Link>
-    <Nav.Link href="#sign-out">Sign Out</Nav.Link>
-    <Nav.Link href="#locations">View Cities</Nav.Link>
-  </Fragment>
+
+  <Dropdown className="dropdown">
+    <Dropdown.Toggle variant="success" id="dropdown-menu">
+        Options
+    </Dropdown.Toggle>
+
+    <Dropdown.Menu>
+      <Dropdown.Item href="#change-password">Change Password</Dropdown.Item>
+      <Dropdown.Item href="#sign-out">Sign Out</Dropdown.Item>
+      <Dropdown.Item href="#locations">View Cities</Dropdown.Item>
+    </Dropdown.Menu>
+  </Dropdown>
+
 )
 
 const unauthenticatedOptions = (
@@ -26,7 +35,7 @@ const alwaysOptions = (
 const Header = ({ user }) => (
   <Navbar bg="success" variant="dark" expand="md">
     <Navbar.Brand href="#">
-      Miraculous Destinations
+      <img src="https://www.onlinelogomaker.com/blog/wp-content/uploads/2017/09/travel-logo-design.jpg" alt="Travel Logo"/>Miraculous Destinations
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
