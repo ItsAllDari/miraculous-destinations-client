@@ -13,7 +13,7 @@ import Locations from '../Locations/Locations'
 import Location from '../Location/Location'
 import LocationEdit from '../LocationEdit/LocationEdit'
 
-const apiKey = 'd5f16a9cc8b9f63fa4160694e460b64d'
+// const apiKey = 'd5f16a9cc8b9f63fa4160694e460b64d'
 
 class App extends Component {
   constructor () {
@@ -23,7 +23,7 @@ class App extends Component {
       user: null,
       msgAlerts: []
     }
-    this.getWeather()
+    // this.getWeather()
   }
 
   setUser = user => this.setState({ user })
@@ -34,13 +34,13 @@ class App extends Component {
     this.setState({ msgAlerts: [...this.state.msgAlerts, { heading, message, variant }] })
   }
 
-  getWeather = async () => {
-    const apiCall = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=Boston,MA&appid=${apiKey}`
-    )
-    const response = await apiCall.json()
-    console.log(response)
-  }
+  // getWeather = async () => {
+  //   const apiCall = await fetch(
+  //     `http://api.openweathermap.org/data/2.5/weather?q=Boston,MA&appid=${apiKey}`
+  //   )
+  //   const response = await apiCall.json()
+  //   console.log(response)
+  // }
 
   render () {
     const { msgAlerts, user } = this.state
