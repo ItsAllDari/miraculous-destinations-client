@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import Spinner from 'react-bootstrap/Spinner'
+import Card from 'react-bootstrap/Card'
 
 import apiUrl from './../../apiConfig'
 // import CheckMark from './CheckMark'
@@ -43,8 +45,8 @@ const Locations = (props) => {
   }, [])
 
   const locationsJsx = locations.map(location => (
-    <li key={location._id}>
-      <Link to={`/locations/${location._id}`}>{location.city}</Link>
+    <li key={location.id}>
+      <Link to={`/locations/${location.id}`}>{location.city}, {location.state}</Link>
     </li>
   ))
 
@@ -53,7 +55,16 @@ const Locations = (props) => {
       <h4 className="location-font">My Locations</h4>
       <div className="center">
         <div className="location-display">
-          {locationsJsx}
+          <Spinner animation="border" variant="success" />  <Spinner animation="border" variant="success" />   <Spinner animation="border" variant="success" /> <Spinner animation="border" variant="success" /> <Spinner animation="border" variant="success" /> <Spinner animation="border" variant="success" /> <Spinner animation="border" variant="success" /> <Spinner animation="border" variant="success" />
+          <Card style={{ width: '18rem', background: 'green' }}>
+            <Card.Img variant="top" src="https://raw.githubusercontent.com/divyanshu013/react-animated-weather/HEAD/react-animated-weather.gif" />
+            <Card.Body>
+              <Card.Title>{locationsJsx}</Card.Title>
+              <Card.Text>
+                Click on any of your locations to see the forecast of the day or add a new city to the list.
+              </Card.Text>
+            </Card.Body>
+          </Card>
         </div>
       </div>
       <Link to={'/new-location'}>
