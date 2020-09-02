@@ -3,6 +3,7 @@
 
 <h2>Back End Links</h2>
 <a href="https://github.com/ItsAllDari/miraculous-destinations">Back End Github</a>
+<a href="https://miraculous-destinations.herokuapp.com/">Back End Deployment on Heroku</a>
 
 <h2>Wireframes</h2>
 
@@ -21,4 +22,14 @@
 </ul>
 
 <h2>Planning</h2>
-<p>I plan to begin with the backend of Django and setting up the models, serializers and URLs. I will be sure to run curl scripts for all of the CRUD actions and follow a methodical order to complete the project. I plan to then move to the front end and set up all of the client side interface so that it can read the data from the backend. Ending with styling of the application.</p>
+<p>I plan to begin with the backend of Django and setting up the models, serializers and URLs. I will be sure to run curl scripts for all of the CRUD actions and follow a methodical order to complete the project. I plan to then move to the front end and set up all of the client side interface so that it can read the data from the backend, ending with styling of the application.</p>
+
+<h2> User Stories</h2>
+<ol>
+<li>As an unregistered user, I would like to sign up with email and password.</li>
+<li>As a registered user, I would like to sign in with email and password.</li>
+<li>As a signed in user, I would like to change password.</li>
+<li>As a signed in user, I would like to add a new location to my list</li>
+<li>As a signed in user, I would like to delete locations that I no longet want</li>
+<li>As a signed in user, I would like to see the weather of the location I click on</li>
+</ol>
